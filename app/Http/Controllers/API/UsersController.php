@@ -16,7 +16,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return $this->userRepository->paginate();
+        return $this->userRepository->paginate(10);
     }
 
     /**
