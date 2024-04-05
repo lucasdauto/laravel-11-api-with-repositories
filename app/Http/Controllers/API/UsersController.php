@@ -4,15 +4,19 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Repositories\UserRepositoryInterface;
 
 class UsersController extends Controller
 {
+
+    public function __construct(private UserRepositoryInterface $userRepository){}
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return $this->userRepository->paginate();
     }
 
     /**
@@ -20,7 +24,8 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user =  $this->userRepository->create($request->all());
+        return $user;
     }
 
     /**
@@ -28,7 +33,7 @@ class UsersController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return $this->userRepository->find($id);
     }
 
     /**
@@ -36,7 +41,8 @@ class UsersController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = $this->userRepository->update($request->all(), $id);
+        return $user;
     }
 
     /**
